@@ -1,0 +1,27 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: qazwsx
+      POSTGRES_USER: postgres
+      POSTGRES_DB: timesheet-persistence
+    ports:
+      - "5433:5432"
+
+  spring-app:
+    build: .
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/timesheet-persistence
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: qazwsx
+      SPRING_DATASOURCE_SCHEMA: etl
+      SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
