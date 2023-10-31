@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximum-pool-size: 30
+      maximumPoolSize: 10
+      schema: etl
+    password: qazwsx
+    url: jdbc:postgresql://localhost:5432/timesheet-persistence
+    username: postgres
+  jpa:
+    properties:
+      hibernate:
