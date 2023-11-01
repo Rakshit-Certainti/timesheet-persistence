@@ -25,7 +25,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/demo-spring-app
 
       - name: Run Docker container
-        run: docker run -d --name your_container_name -p 8081:8081 \
+        run: docker run -d --name certainti_container -p 8081:8081 \
           -e SPRING_DATASOURCE_URL=jdbc:postgresql://your_postgres_host:5432/timesheet-persistence \
           -e SPRING_DATASOURCE_USERNAME=postgres \
           -e SPRING_DATASOURCE_PASSWORD=qazwsx \
@@ -34,4 +34,4 @@ jobs:
           -e SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL=true \
           -e SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true \
           -e SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect \
-          your_registry_username/demo-spring-app
+          ${{ secrets.DOCKER_USERNAME }}/demo-spring-app
